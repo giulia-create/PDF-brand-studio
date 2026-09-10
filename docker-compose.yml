@@ -1,0 +1,11 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: pdfbrand
+      POSTGRES_USER: pdfbrand
+      POSTGRES_PASSWORD: pdfbrand
+    ports: ["5432:5432"]
+    volumes: ["pdfbrand_pg:/var/lib/postgresql/data"]
+volumes:
+  pdfbrand_pg:

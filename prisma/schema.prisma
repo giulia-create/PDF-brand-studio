@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String      @id @default(cuid())
+  email     String      @unique
+  createdAt DateTime    @default(now())
+  brandKits BrandKit[]
+  documents Document[]
+}
+
+model BrandKit {
+  id          String   @id @default(cuid())
+  name        String
+  companyName String?
+  address     String?
+  phone       String?
+  email       String?
+  website     String?
+  vatNumber   String?
+  taxCode     String?
+  footerText  String?
+  primaryHex  String?  @default("#111827")
+  logoUrl     String?
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Document {
+  id         String   @id @default(cuid())
+  name       String
+  mimeType   String
+  pageCount  Int?
+  storageKey String?
+  category   String?
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}

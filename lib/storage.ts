@@ -11,7 +11,7 @@ export type StoredDocument = {
   updatedAt: string;
 };
 
-constconst root = process.env.DATA_DIR || '/data/documents';
+const root = process.env.DATA_DIR || '/data/documents';
 export const docDir = (id:string) => join(root, id);
 export const pdfPath = (id:string) => join(docDir(id), 'document.pdf');
 export const metaPath = (id:string) => join(docDir(id), 'meta.json');
